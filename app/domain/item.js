@@ -23,5 +23,6 @@ Item.prototype.put_to_order = function(){
     cart.bought_items[this.name] = cart.bought_items[this.name] || this;
     cart.bought_items[this.name].count++;
     Cart.save_cart(cart);
+
 };
 
