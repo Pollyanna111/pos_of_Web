@@ -2,6 +2,7 @@ $(document).ready(function(){
     Cart.refresh_the_cart();
     Cart.show_paying_items();
     Cart.show_promotion_items();
+    Cart.show_the_cost();
     $('.text-right').find('.btn').on('click',function(){
         Cart.save_cart(new Cart());
     });

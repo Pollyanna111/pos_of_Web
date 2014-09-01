@@ -89,7 +89,22 @@ Cart.recompute_it_with_promotion = function(){
 };
 
 Cart.show_the_total_cost = function(){
-    $('.font_weight').text('总计：'+Cart.total_cost());
+    $('.total_cost').text('总计：'+Cart.total_cost());
+};
+
+Cart.show_the_cost = function(){
+    Cart.show_the_total_cost();
+    Cart.money_saved();
+};
+
+Cart.money_saved = function(){
+    var money_saved = 0, cart = Cart.get_cart();
+    _(_(cart.bought_items).keys()).each(function(item_name) {
+        if(cart.bought_items[item_name].free_number !== 0 ){
+            money_saved += cart.bought_items[item_name].free_number * cart.bought_items[item_name].price;
+        }
+    });
+    $('.money_saved').text('节省：'+ money_saved);
 };
 
 Cart.total_cost = function(){
@@ -127,10 +142,15 @@ Cart.show_paying_items = function(){
 };
 
 Cart.show_promotion_items = function(){
-    var cart = Cart.get_cart();
+    var cart = Cart.get_cart(),promotion_detail;
     _(_(cart.bought_items).keys()).each(function(item_name) {
-        if(cart.bought_items[item_name]){
-
+        if(cart.bought_items[item_name].free_number !== 0 ){
+            promotion_detail = promotion_detail_generator(cart.bought_items[item_name]);
+            promotion_detail.appendTo($('.promotion_items'));
         }
     });
+};
+
+var promotion_detail_generator = function(item){
+    return $('<tr><td>'+item.kind+'</td><td>'+item.name+'</td><td>'+item.free_number+'</td></tr>');
 };
