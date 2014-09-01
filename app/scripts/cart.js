@@ -6,7 +6,7 @@ $(document).ready(function(){
         Cart.cut_item_from_cart($(this).closest('td').prev('td').prev('td').prev('td').text(),this);
 //        if(Cart.get_the_cart_number() === {}){
 //
-//        }怎么实现跳转功能
+//        }怎么实现跳转功能??问江江
     });
     $('.add').on('click',function(){
         Cart.add_item_number($(this).closest('td').prev('td').prev('td').prev('td').text(),this);
@@ -16,7 +16,7 @@ $(document).ready(function(){
 var show_cart_items = function(){
     var cart = Cart.get_cart(), item_detail;
     _(_(cart.bought_items).keys()).each(function(item_name) {
-        console.log(cart.bought_items[item_name].free_number);
+        item_detail = item_detail_generator(cart.bought_items[item_name]);
         if(cart.bought_items[item_name].free_number === 0){
             item_detail = item_detail_generator(cart.bought_items[item_name]);
         }else{
