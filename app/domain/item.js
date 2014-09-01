@@ -22,6 +22,6 @@ Item.prototype.put_to_order = function(){
     var cart = Cart.get_cart();
     cart.bought_items[this.name] = cart.bought_items[this.name] || this;
     cart.bought_items[this.name].count++;
-    Cart.save_cart(cart);
+    Cart.recompute_it_with_promotion(cart);
 };
 

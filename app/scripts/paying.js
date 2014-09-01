@@ -14,18 +14,7 @@ var paying_item_detail_generator = function(item){
             item.price+'</td><td>'+
             item.unit+'</td><td>'+
             item.count+'</td>'+
-            '<td>'+(item.price*item.count)+'元</td>'
-    );
-    return item_detail;
-};
-
-var paying_item_detail_generator_promotion = function(item){
-    var item_detail =$('<tr><td>'+item.kind+'</td><td>'
-            +item.name+'</td><td>'+
-            item.price+'</td><td>'+
-            item.unit+'</td><td>' +
-            item.count+'</td>'+
-            '<td>'+(item.price*(item.count-item.free_number))+'元（原价：'+(item.price*item.count)+'元）</td>'
+            '<td>'+Cart.show_the_promotion_price(item.name)+'</td>'
     );
     return item_detail;
 };
