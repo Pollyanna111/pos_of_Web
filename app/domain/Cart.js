@@ -48,8 +48,15 @@ Cart.cut_item_from_cart = function(name,element){
         return;
     }
     cart.bought_items[name].count--;
-    $(element).closest('td').next('td').text(cart.bought_items[name].price*cart.bought_items[name].count+'元');
     Cart.save_cart(cart);
+    Cart.recompute_it_with_promotion();
+//    $(element).closest('td').next('td').text(cart.bought_items[name].price*cart.bought_items[name].count+'元');
+    if(Cart.get_cart().bought_items[name].free_number === 0){
+        $(element).closest('td').next('td').text(cart.bought_items[name].price*cart.bought_items[name].count+'元');
+    }else{
+        cart = Cart.get_cart();
+        $(element).closest('td').next('td').text(cart.bought_items[name].price*(cart.bought_items[name].count-cart.bought_items[name].free_number)+'元(原价：'+cart.bought_items[name].price*cart.bought_items[name].count+'元)');
+    }
     $(element).next('button').text(+$(element).next('button').text()-1);
     Cart.refresh_the_cart();
 };
@@ -57,8 +64,14 @@ Cart.cut_item_from_cart = function(name,element){
 
 Cart.add_item_number = function(name,element){
     Cart.add_item_to_cart(name);
+    Cart.recompute_it_with_promotion();
     var cart = Cart.get_cart();
-    $(element).closest('td').next('td').text(cart.bought_items[name].price*cart.bought_items[name].count+'元');
+//    $(element).closest('td').next('td').text(cart.bought_items[name].price*cart.bought_items[name].count+'元');
+    if(Cart.get_cart().bought_items[name].free_number === 0){
+        $(element).closest('td').next('td').text(cart.bought_items[name].price*cart.bought_items[name].count+'元');
+    }else{
+        $(element).closest('td').next('td').text(cart.bought_items[name].price*(cart.bought_items[name].count-cart.bought_items[name].free_number)+'元(原价：'+cart.bought_items[name].price*cart.bought_items[name].count+'元)');
+    }
     $(element).prev('button').text(+$(element).prev('button').text()+1);
     Cart.refresh_the_cart();
 };
