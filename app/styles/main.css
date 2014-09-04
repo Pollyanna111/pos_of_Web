@@ -109,3 +109,7 @@ th {
 .font_weight{
     font-weight: bold;
 }
+
+.active{
+    background-color: #9C9999;
+}
